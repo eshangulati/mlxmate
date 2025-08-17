@@ -38,9 +38,6 @@ def main():
     # Get the package root directory
     package_root = get_package_root()
     
-    # Change to the package directory
-    os.chdir(package_root)
-    
     # Add the package root to Python path
     sys.path.insert(0, str(package_root))
     
