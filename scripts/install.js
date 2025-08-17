@@ -61,15 +61,24 @@ function installDependencies(pythonCmd) {
             console.log('✅ Python dependencies installed successfully with pip --user');
         } catch (error) {
             // If --user fails, try without it
-            console.log('⚠️  --user installation failed, trying without --user...');
-            execSync(`${pythonCmd} -m pip install -r "${requirementsPath}"`, {
-                stdio: 'inherit'
-            });
-            console.log('✅ Python dependencies installed successfully with pip');
+            try {
+                console.log('⚠️  --user installation failed, trying without --user...');
+                execSync(`${pythonCmd} -m pip install -r "${requirementsPath}"`, {
+                    stdio: 'inherit'
+                });
+                console.log('✅ Python dependencies installed successfully with pip');
+            } catch (error2) {
+                // If that fails, try with --break-system-packages
+                console.log('⚠️  Standard installation failed, trying with --break-system-packages...');
+                execSync(`${pythonCmd} -m pip install --break-system-packages -r "${requirementsPath}"`, {
+                    stdio: 'inherit'
+                });
+                console.log('✅ Python dependencies installed successfully with --break-system-packages');
+            }
         }
     } catch (error) {
         console.error('❌ Failed to install Python dependencies');
-        console.log('Try running: pip install --user -r requirements.txt manually');
+        console.log('Try running: pip install --break-system-packages -r requirements.txt manually');
         process.exit(1);
     }
 }
