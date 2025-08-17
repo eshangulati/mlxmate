@@ -14,15 +14,6 @@ def get_python_executable():
     """Get the appropriate Python executable"""
     # Use the system Python executable
     return sys.executable
-"""
-MLXMate - Your MLX-powered coding companion
-Global executable for npm package
-"""
-
-import os
-import sys
-import subprocess
-from pathlib import Path
 
 def get_package_root():
     """Get the root directory of the installed package"""
