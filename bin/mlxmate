@@ -1,4 +1,28 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+MLXMate - Your MLX-powered coding companion
+Global executable for npm package
+"""
+
+import os
+import sys
+import subprocess
+from pathlib import Path
+
+def get_conda_python():
+    """Get the Python executable from the active conda environment"""
+    # Check if we're in a conda environment
+    conda_env = os.environ.get('CONDA_DEFAULT_ENV')
+    if conda_env:
+        # Get the conda prefix
+        conda_prefix = os.environ.get('CONDA_PREFIX')
+        if conda_prefix:
+            # Return the Python executable from the conda environment
+            return os.path.join(conda_prefix, 'bin', 'python')
+    
+    # Fall back to the current Python executable
+    return sys.executable
 """
 MLXMate - Your MLX-powered coding companion
 Global executable for npm package
@@ -65,7 +89,7 @@ def main():
                 sys.exit(1)
         elif command == "setup":
             # Run setup
-            subprocess.run([sys.executable, "terminal_claude.py", "setup"])
+            subprocess.run([get_conda_python(), "terminal_claude.py", "setup"])
         elif command == "help":
             # Show help
             print("MLXMate - Your MLX-powered coding companion")
@@ -83,7 +107,7 @@ def main():
             print("  mlxmate refactor <file>            # Refactor code")
         else:
             # Pass through to the main terminal_claude.py
-            subprocess.run([sys.executable, "terminal_claude.py"] + sys.argv[1:])
+            subprocess.run([get_conda_python(), "terminal_claude.py"] + sys.argv[1:])
     else:
         # No arguments, start interactive mode
         try:
