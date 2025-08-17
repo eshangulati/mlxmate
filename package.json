@@ -1,0 +1,64 @@
+{
+  "name": "mlxmate",
+  "version": "1.0.0",
+  "description": "🤖 Your MLX-powered coding companion for Mac - AI assistant with Mistral",
+  "main": "terminal_claude.py",
+  "bin": {
+    "mlxmate": "./bin/mlxmate",
+    "mate": "./bin/mlxmate"
+  },
+  "scripts": {
+    "start": "python terminal_claude.py",
+    "interactive": "python interactive_mlx.py",
+    "test": "python test_mlx.py",
+    "setup": "python terminal_claude.py setup",
+    "postinstall": "pip install -r requirements.txt"
+  },
+  "keywords": [
+    "ai",
+    "coding",
+    "assistant",
+    "terminal",
+    "mlx",
+    "mistral",
+    "apple-silicon",
+    "python",
+    "code-generation",
+    "code-review"
+  ],
+  "author": "Eshan Gulati",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eshangulati/mlxmate.git"
+  },
+  "bugs": {
+    "url": "https://github.com/eshangulati/mlxmate/issues"
+  },
+  "homepage": "https://github.com/eshangulati/mlxmate#readme",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "os": [
+    "darwin"
+  ],
+  "cpu": [
+    "arm64",
+    "x64"
+  ],
+  "dependencies": {},
+  "devDependencies": {},
+  "files": [
+    "terminal_claude.py",
+    "interactive_mlx.py",
+    "test_mlx.py",
+    "core/",
+    "ui/",
+    "utils/",
+    "requirements.txt",
+    "README.md",
+    "LICENSE",
+    "bin/",
+    "scripts/"
+  ]
+}

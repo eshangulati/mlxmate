@@ -1,0 +1,17 @@
+requests==2.31.0
+rich==13.7.0
+click==8.1.7
+pyyaml==6.0.1
+watchdog==3.0.0
+gitpython==3.1.40
+pathlib2==2.3.7
+python-dotenv==1.0.0
+typer==0.9.0
+prompt_toolkit==3.0.43
+fuzzywuzzy==0.18.0
+python-Levenshtein==0.23.0
+colorama==0.4.6
+aiohttp==3.9.1
+mlx>=0.6.0
+mlx-lm>=0.2.0
+sentencepiece>=0.1.99
