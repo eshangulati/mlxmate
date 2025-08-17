@@ -38,11 +38,6 @@ def main():
     # Add the package root to Python path
     sys.path.insert(0, str(package_root))
     
-    # Debug: Print the current working directory and Python path
-    print(f"DEBUG: Working directory: {os.getcwd()}")
-    print(f"DEBUG: Python path: {sys.path[0]}")
-    print(f"DEBUG: Package root: {package_root}")
-    
     # Check if we have command line arguments
     if len(sys.argv) > 1:
         command = sys.argv[1]
