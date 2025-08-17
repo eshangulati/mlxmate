@@ -13,6 +13,12 @@ def get_package_root():
     """Get the root directory of the installed package"""
     # Get the directory where this script is located
     script_dir = Path(__file__).parent.parent.absolute()
+    
+    # If this is a global npm installation, the structure is different
+    if script_dir.name == 'bin':
+        # We're in /usr/local/bin or /opt/homebrew/bin, so go up to lib/node_modules/mlxmate
+        return script_dir.parent / 'lib' / 'node_modules' / 'mlxmate'
+    
     return script_dir
 
 def main():
