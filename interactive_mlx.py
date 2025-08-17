@@ -102,8 +102,12 @@ class InteractiveMLX:
                                 context += f"- {file_path}\n"
                         context += "\n"
                     
+                    # Add specific instructions for code-related queries
+                    if any(keyword in user_input.lower() for keyword in ['code', 'implementation', 'class', 'function', 'method']):
+                        context += "IMPORTANT: When analyzing code, provide specific details from the actual file contents shown above. Reference specific classes, functions, and code patterns you see in the files.\n\n"
+                    
                     # Create enhanced prompt
-                    enhanced_prompt = f"{context}\n\nUser Question: {user_input}\n\nPlease provide a detailed analysis based on the codebase context above."
+                    enhanced_prompt = f"{context}\n\nUser Question: {user_input}\n\nPlease provide a detailed analysis based on the codebase context above. If the user is asking about specific files or code, provide concrete details from the actual file contents shown above. Be specific and reference the actual code when possible."
                     response = await self.model_provider.generate(enhanced_prompt)
                 else:
                     # Regular response without codebase context

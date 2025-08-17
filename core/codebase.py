@@ -464,9 +464,11 @@ class CodebaseAnalyzer:
         for file_path in relevant_files[:10]:  # Increased to top 10 for directory queries
             if file_path in self.file_index:
                 file_info = self.file_index[file_path]
+                # For directory queries, provide full content for better analysis
+                content_limit = 8000 if '/' in query or 'directory' in query_lower else 2000
                 context['relevant_files'].append({
                     'path': file_path,
-                    'content': file_info['content'][:2000],  # Limit content size
+                    'content': file_info['content'][:content_limit],  # Increased limit for directory queries
                     'symbols': file_info['symbols'],
                     'language': file_info['language']
                 })
