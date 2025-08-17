@@ -30,7 +30,7 @@ class ModelProvider(ABC):
 class MLXProvider(ModelProvider):
     """MLX provider for local models on Apple Silicon"""
     
-    def __init__(self, model_path: str = "mlx-community/Mistral-7B-Instruct-v0.3-4bit"):
+    def __init__(self, model_path: str = "mlx-community/gemma-3-12b-it-4bit"):
         self.model_path = model_path
         self.model = None
         self.tokenizer = None
