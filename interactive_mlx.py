@@ -86,7 +86,7 @@ class InteractiveMLX:
                     
                     # Add relevant files
                     if context_data['relevant_files']:
-                        context += "Relevant files:\n\n"
+                        context += f"Found {len(context_data['relevant_files'])} relevant files:\n\n"
                         for file_info in context_data['relevant_files']:
                             context += f"File: {file_info['path']}\n"
                             context += f"Language: {file_info['language']}\n"

@@ -447,7 +447,7 @@ class CodebaseAnalyzer:
         query_lower = query.lower()
         
         # Check if this is a directory or file path query
-        if '/' in query or 'directory' in query_lower or 'folder' in query_lower:
+        if '/' in query or 'directory' in query_lower or 'folder' in query_lower or 'problems' in query_lower:
             # Directory/file path query - return all files in that directory
             relevant_files = self._directory_search(query)
         else:
@@ -524,12 +524,20 @@ class CodebaseAnalyzer:
         # Clean up the directory path
         dir_part = dir_part.replace('eshangulati/', 'eshangulati-monash/')
         
-        for file_path in self.file_index.keys():
-            file_path_lower = file_path.lower()
-            
-            # Check if the file is in the specified directory
-            if dir_part in file_path_lower:
-                matching_files.append(file_path)
+        # Handle specific file queries like "q1b_problem.py"
+        if 'q1b_problem.py' in query_lower or 'q1b_problem' in query_lower:
+            # Look for q1b_problem.py specifically
+            for file_path in self.file_index.keys():
+                if 'q1b_problem.py' in file_path.lower():
+                    matching_files.append(file_path)
+        else:
+            # General directory search
+            for file_path in self.file_index.keys():
+                file_path_lower = file_path.lower()
+                
+                # Check if the file is in the specified directory
+                if dir_part in file_path_lower:
+                    matching_files.append(file_path)
         
         # Sort by path for consistent results
         matching_files.sort()
