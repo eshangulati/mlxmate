@@ -19,12 +19,14 @@ A terminal-based AI coding assistant that runs locally on Apple Silicon using ML
 ### Installation
 
 ```bash
-# Install MLXMate
+# Install MLXMate (automatically installs Python dependencies)
 npm install -g mlxmate
-
-# Install Python dependencies (required)
-pip3 install --user -r requirements.txt
 ```
+
+The installation script will automatically:
+- Detect if you have conda installed and create a dedicated environment
+- Install all Python dependencies (MLX, Mistral, etc.)
+- Test the installation to ensure everything works
 
 ### Usage
 
