@@ -1,6 +1,6 @@
 {
   "name": "mlxmate",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "🤖 Your MLX-powered coding companion for Mac - AI assistant with Mistral",
   "main": "terminal_claude.py",
   "bin": {
@@ -52,6 +52,7 @@
     "terminal_claude.py",
     "interactive_mlx.py",
     "test_mlx.py",
+    "list_indexed_files.py",
     "core/",
     "ui/",
     "utils/",
