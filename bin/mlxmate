@@ -57,8 +57,8 @@ def main():
             subprocess.run([get_python_executable(), "test_mlx.py"])
         elif command == "list-files":
             # Show files being indexed from current directory
-            import os
-            current_dir = os.getcwd()
+            import os as os_module
+            current_dir = os_module.getcwd()
             script_path = package_root / "list_indexed_files.py"
             subprocess.run([get_python_executable(), str(script_path)], cwd=current_dir)
         elif command == "setup":
