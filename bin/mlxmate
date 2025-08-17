@@ -21,6 +21,9 @@ def get_package_root():
     elif script_dir.name == 'node_modules':
         # We're in node_modules, so the package is the next directory
         return script_dir / 'mlxmate'
+    elif script_dir.name == 'homebrew':
+        # We're in /opt/homebrew, so go to lib/node_modules/mlxmate
+        return script_dir / 'lib' / 'node_modules' / 'mlxmate'
     
     return script_dir
 
