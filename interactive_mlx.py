@@ -27,9 +27,11 @@ class InteractiveMLX:
             self.model_provider = MLXProvider(self.model_path)
             self.console.print("[green]✅ Model loaded successfully![/green]")
             
-            # Initialize codebase analyzer
+            # Initialize codebase analyzer with current working directory
             self.console.print("[yellow]🔍 Building codebase index...[/yellow]")
-            self.codebase_analyzer = CodebaseAnalyzer()
+            import os
+            current_dir = os.getcwd()
+            self.codebase_analyzer = CodebaseAnalyzer(current_dir)
             self.console.print("[green]✅ Codebase indexed successfully![/green]")
             
             return True

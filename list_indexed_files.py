@@ -36,7 +36,13 @@ if __name__ == "__main__":
     print("🔍 Files that would be indexed by MLXMate:")
     print("=" * 50)
     
-    indexed_files = get_code_files()
+    # Use current working directory
+    import os
+    current_dir = os.getcwd()
+    print(f"📁 Analyzing directory: {current_dir}")
+    print()
+    
+    indexed_files = get_code_files(current_dir)
     
     if not indexed_files:
         print("No code files found in current directory!")
