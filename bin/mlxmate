@@ -64,6 +64,9 @@ def main():
         elif command == "test":
             # Run test
             subprocess.run([get_python_executable(), "test_mlx.py"])
+        elif command == "list-files":
+            # Show files being indexed
+            subprocess.run([get_python_executable(), "list_indexed_files.py"])
         elif command == "setup":
             # Run setup
             subprocess.run([get_python_executable(), "terminal_claude.py", "setup"])
@@ -77,6 +80,7 @@ def main():
             print("  mlxmate setup                      # Run initial setup")
             print("  mlxmate help                       # Show this help")
             print("\nCommands:")
+            print("  mlxmate list-files                 # Show files being indexed")
             print("  mlxmate search <query>             # Search codebase")
             print("  mlxmate analyze <file>             # Analyze a file")
             print("  mlxmate generate <prompt>          # Generate code")
