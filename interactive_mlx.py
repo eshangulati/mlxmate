@@ -94,6 +94,14 @@ class InteractiveMLX:
                     else:
                         context += "No specific files found, but here's the general project structure.\n\n"
                     
+                    # Add complete file list for directory queries
+                    if 'problems' in user_input.lower() or 'directory' in user_input.lower():
+                        context += "Complete file list:\n"
+                        for file_path in sorted(self.codebase_analyzer.file_index.keys()):
+                            if 'problems' in file_path.lower():
+                                context += f"- {file_path}\n"
+                        context += "\n"
+                    
                     # Create enhanced prompt
                     enhanced_prompt = f"{context}\n\nUser Question: {user_input}\n\nPlease provide a detailed analysis based on the codebase context above."
                     response = await self.model_provider.generate(enhanced_prompt)

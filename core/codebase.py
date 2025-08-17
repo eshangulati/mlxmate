@@ -511,11 +511,22 @@ class CodebaseAnalyzer:
         query_lower = query.lower()
         matching_files = []
         
+        # Extract directory path from query
+        # Handle queries like "what files are in eshangulati/problems"
+        if 'in ' in query_lower:
+            # Extract the directory part after "in "
+            dir_part = query_lower.split('in ')[-1].strip()
+        else:
+            dir_part = query_lower
+        
+        # Clean up the directory path
+        dir_part = dir_part.replace('eshangulati/', 'eshangulati-monash/')
+        
         for file_path in self.file_index.keys():
             file_path_lower = file_path.lower()
             
-            # Check if the query matches the directory path
-            if query_lower in file_path_lower:
+            # Check if the file is in the specified directory
+            if dir_part in file_path_lower:
                 matching_files.append(file_path)
         
         # Sort by path for consistent results
