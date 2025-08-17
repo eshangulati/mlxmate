@@ -289,7 +289,10 @@ class CodebaseAnalyzer:
         """Extract Python imports"""
         imports = []
         try:
-            tree = ast.parse(content)
+            import warnings
+            with warnings.catch_warnings():
+                warnings.simplefilter("ignore", SyntaxWarning)
+                tree = ast.parse(content)
             for node in ast.walk(tree):
                 if isinstance(node, ast.Import):
                     for alias in node.names:
