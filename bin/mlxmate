@@ -47,11 +47,13 @@ def main():
         args = sys.argv[2:]
         
         if command == "interactive":
-            # Run interactive mode
-            subprocess.run([get_python_executable(), "interactive_mlx.py"])
+            # Run interactive mode from package directory
+            script_path = package_root / "interactive_mlx.py"
+            subprocess.run([get_python_executable(), str(script_path)])
         elif command == "test":
-            # Run test
-            subprocess.run([get_python_executable(), "test_mlx.py"])
+            # Run test from package directory
+            script_path = package_root / "test_mlx.py"
+            subprocess.run([get_python_executable(), str(script_path)])
         elif command == "list-files":
             # Show files being indexed from current directory
             import os as os_module
@@ -59,8 +61,9 @@ def main():
             script_path = package_root / "list_indexed_files.py"
             subprocess.run([get_python_executable(), str(script_path)], cwd=current_dir)
         elif command == "setup":
-            # Run setup
-            subprocess.run([get_python_executable(), "terminal_claude.py", "setup"])
+            # Run setup from package directory
+            script_path = package_root / "terminal_claude.py"
+            subprocess.run([get_python_executable(), str(script_path), "setup"])
         elif command == "help":
             # Show help
             print("MLXMate - Your MLX-powered coding companion")
@@ -78,11 +81,13 @@ def main():
             print("  mlxmate review <file>              # Review code")
             print("  mlxmate refactor <file>            # Refactor code")
         else:
-            # Pass through to the main terminal_claude.py
-            subprocess.run([get_python_executable(), "terminal_claude.py"] + sys.argv[1:])
+            # Pass through to the main terminal_claude.py from package directory
+            script_path = package_root / "terminal_claude.py"
+            subprocess.run([get_python_executable(), str(script_path)] + sys.argv[1:])
     else:
-        # No arguments, start interactive mode
-        subprocess.run([get_python_executable(), "interactive_mlx.py"])
+        # No arguments, start interactive mode from package directory
+        script_path = package_root / "interactive_mlx.py"
+        subprocess.run([get_python_executable(), str(script_path)])
 
 if __name__ == "__main__":
     main()
