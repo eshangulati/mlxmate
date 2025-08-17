@@ -444,7 +444,15 @@ class CodebaseAnalyzer:
     
     async def get_relevant_context(self, query: str) -> Dict[str, Any]:
         """Get relevant context for a query using semantic search"""
-        relevant_files = self._semantic_search(query)
+        query_lower = query.lower()
+        
+        # Check if this is a directory or file path query
+        if '/' in query or 'directory' in query_lower or 'folder' in query_lower:
+            # Directory/file path query - return all files in that directory
+            relevant_files = self._directory_search(query)
+        else:
+            # Semantic query - use semantic search
+            relevant_files = self._semantic_search(query)
         
         context = {
             'relevant_files': [],
@@ -453,7 +461,7 @@ class CodebaseAnalyzer:
             'coding_standards': self.coding_standards
         }
         
-        for file_path in relevant_files[:5]:  # Top 5 most relevant
+        for file_path in relevant_files[:10]:  # Increased to top 10 for directory queries
             if file_path in self.file_index:
                 file_info = self.file_index[file_path]
                 context['relevant_files'].append({
@@ -497,6 +505,22 @@ class CodebaseAnalyzer:
         # Sort by score and return file paths
         scores.sort(key=lambda x: x[1], reverse=True)
         return [file_path for file_path, score in scores if score > 30]
+    
+    def _directory_search(self, query: str) -> List[str]:
+        """Search for files in a specific directory"""
+        query_lower = query.lower()
+        matching_files = []
+        
+        for file_path in self.file_index.keys():
+            file_path_lower = file_path.lower()
+            
+            # Check if the query matches the directory path
+            if query_lower in file_path_lower:
+                matching_files.append(file_path)
+        
+        # Sort by path for consistent results
+        matching_files.sort()
+        return matching_files
     
     def _generate_codebase_summary(self) -> Dict[str, Any]:
         """Generate a summary of the codebase"""
