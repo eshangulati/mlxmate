@@ -447,7 +447,8 @@ class CodebaseAnalyzer:
         query_lower = query.lower()
         
         # Check if this is a directory or file path query
-        if '/' in query or 'directory' in query_lower or 'folder' in query_lower or 'problems' in query_lower:
+        if ('/' in query or 'directory' in query_lower or 'folder' in query_lower or 
+            'problems' in query_lower or 'q1b_problem' in query_lower or 'q1b_problem.py' in query_lower):
             # Directory/file path query - return all files in that directory
             relevant_files = self._directory_search(query)
         else:
@@ -529,6 +530,10 @@ class CodebaseAnalyzer:
             # Look for q1b_problem.py specifically
             for file_path in self.file_index.keys():
                 if 'q1b_problem.py' in file_path.lower():
+                    matching_files.append(file_path)
+            # Also include q1b_solver.py if it exists
+            for file_path in self.file_index.keys():
+                if 'q1b_solver.py' in file_path.lower():
                     matching_files.append(file_path)
         else:
             # General directory search

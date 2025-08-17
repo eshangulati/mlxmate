@@ -90,7 +90,8 @@ class InteractiveMLX:
                         for file_info in context_data['relevant_files']:
                             context += f"File: {file_info['path']}\n"
                             context += f"Language: {file_info['language']}\n"
-                            context += f"Content preview: {file_info['content'][:300]}...\n\n"
+                            context += f"Content length: {len(file_info['content'])} characters\n"
+                            context += f"Content preview: {file_info['content'][:500]}...\n\n"
                     else:
                         context += "No specific files found, but here's the general project structure.\n\n"
                     
