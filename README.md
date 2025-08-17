@@ -24,9 +24,9 @@ npm install -g mlxmate
 ```
 
 The installation script will automatically:
-- Detect if you have conda installed and create a dedicated environment
-- Install all Python dependencies (MLX, Mistral, etc.)
+- Install all Python dependencies (MLX, Mistral, etc.) using pip
 - Test the installation to ensure everything works
+- Work with any Python 3.8+ installation
 
 ### Usage
 

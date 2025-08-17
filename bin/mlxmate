@@ -10,18 +10,9 @@ import sys
 import subprocess
 from pathlib import Path
 
-def get_conda_python():
-    """Get the Python executable from the active conda environment"""
-    # Check if we're in a conda environment
-    conda_env = os.environ.get('CONDA_DEFAULT_ENV')
-    if conda_env:
-        # Get the conda prefix
-        conda_prefix = os.environ.get('CONDA_PREFIX')
-        if conda_prefix:
-            # Return the Python executable from the conda environment
-            return os.path.join(conda_prefix, 'bin', 'python')
-    
-    # Fall back to the current Python executable
+def get_python_executable():
+    """Get the appropriate Python executable"""
+    # Use the system Python executable
     return sys.executable
 """
 MLXMate - Your MLX-powered coding companion
@@ -69,27 +60,13 @@ def main():
         
         if command == "interactive":
             # Run interactive mode
-            try:
-                from interactive_mlx import main as interactive_main
-                import asyncio
-                asyncio.run(interactive_main())
-            except ImportError as e:
-                print(f"Error: Could not import interactive_mlx module: {e}")
-                print("Make sure you're in the correct directory and all files are present.")
-                sys.exit(1)
+            subprocess.run([get_python_executable(), "interactive_mlx.py"])
         elif command == "test":
             # Run test
-            try:
-                from test_mlx import test_mlx
-                import asyncio
-                asyncio.run(test_mlx())
-            except ImportError as e:
-                print(f"Error: Could not import test_mlx module: {e}")
-                print("Make sure you're in the correct directory and all files are present.")
-                sys.exit(1)
+            subprocess.run([get_python_executable(), "test_mlx.py"])
         elif command == "setup":
             # Run setup
-            subprocess.run([get_conda_python(), "terminal_claude.py", "setup"])
+            subprocess.run([get_python_executable(), "terminal_claude.py", "setup"])
         elif command == "help":
             # Show help
             print("MLXMate - Your MLX-powered coding companion")
@@ -107,17 +84,10 @@ def main():
             print("  mlxmate refactor <file>            # Refactor code")
         else:
             # Pass through to the main terminal_claude.py
-            subprocess.run([get_conda_python(), "terminal_claude.py"] + sys.argv[1:])
+            subprocess.run([get_python_executable(), "terminal_claude.py"] + sys.argv[1:])
     else:
         # No arguments, start interactive mode
-        try:
-            from interactive_mlx import main as interactive_main
-            import asyncio
-            asyncio.run(interactive_main())
-        except ImportError as e:
-            print(f"Error: Could not import interactive_mlx module: {e}")
-            print("Make sure you're in the correct directory and all files are present.")
-            sys.exit(1)
+        subprocess.run([get_python_executable(), "interactive_mlx.py"])
 
 if __name__ == "__main__":
     main()
