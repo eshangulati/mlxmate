@@ -33,14 +33,24 @@ def main():
         
         if command == "interactive":
             # Run interactive mode
-            from interactive_mlx import main as interactive_main
-            import asyncio
-            asyncio.run(interactive_main())
+            try:
+                from interactive_mlx import main as interactive_main
+                import asyncio
+                asyncio.run(interactive_main())
+            except ImportError as e:
+                print(f"Error: Could not import interactive_mlx module: {e}")
+                print("Make sure you're in the correct directory and all files are present.")
+                sys.exit(1)
         elif command == "test":
             # Run test
-            from test_mlx import test_mlx
-            import asyncio
-            asyncio.run(test_mlx())
+            try:
+                from test_mlx import test_mlx
+                import asyncio
+                asyncio.run(test_mlx())
+            except ImportError as e:
+                print(f"Error: Could not import test_mlx module: {e}")
+                print("Make sure you're in the correct directory and all files are present.")
+                sys.exit(1)
         elif command == "setup":
             # Run setup
             subprocess.run([sys.executable, "terminal_claude.py", "setup"])
@@ -64,9 +74,14 @@ def main():
             subprocess.run([sys.executable, "terminal_claude.py"] + sys.argv[1:])
     else:
         # No arguments, start interactive mode
-        from interactive_mlx import main as interactive_main
-        import asyncio
-        asyncio.run(interactive_main())
+        try:
+            from interactive_mlx import main as interactive_main
+            import asyncio
+            asyncio.run(interactive_main())
+        except ImportError as e:
+            print(f"Error: Could not import interactive_mlx module: {e}")
+            print("Make sure you're in the correct directory and all files are present.")
+            sys.exit(1)
 
 if __name__ == "__main__":
     main()
