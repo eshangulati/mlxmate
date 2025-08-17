@@ -1,6 +1,6 @@
 {
   "name": "mlxmate",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "🤖 Your MLX-powered coding companion for Mac - AI assistant with Mistral",
   "main": "terminal_claude.py",
   "bin": {
@@ -11,8 +11,7 @@
     "start": "python terminal_claude.py",
     "interactive": "python interactive_mlx.py",
     "test": "python test_mlx.py",
-    "setup": "python terminal_claude.py setup",
-    "postinstall": "python3 -m pip install --user -r requirements.txt"
+    "setup": "python terminal_claude.py setup"
   },
   "keywords": [
     "ai",
