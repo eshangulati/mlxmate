@@ -18,6 +18,9 @@ def get_package_root():
     if script_dir.name == 'bin':
         # We're in /usr/local/bin or /opt/homebrew/bin, so go up to lib/node_modules/mlxmate
         return script_dir.parent / 'lib' / 'node_modules' / 'mlxmate'
+    elif script_dir.name == 'node_modules':
+        # We're in node_modules, so the package is the next directory
+        return script_dir / 'mlxmate'
     
     return script_dir
 
@@ -31,6 +34,11 @@ def main():
     
     # Add the package root to Python path
     sys.path.insert(0, str(package_root))
+    
+    # Debug: Print the current working directory and Python path
+    print(f"DEBUG: Working directory: {os.getcwd()}")
+    print(f"DEBUG: Python path: {sys.path[0]}")
+    print(f"DEBUG: Package root: {package_root}")
     
     # Check if we have command line arguments
     if len(sys.argv) > 1:
