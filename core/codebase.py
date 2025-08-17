@@ -145,7 +145,10 @@ class CodebaseAnalyzer:
         }
         
         try:
-            tree = ast.parse(content)
+            import warnings
+            with warnings.catch_warnings():
+                warnings.simplefilter("ignore", SyntaxWarning)
+                tree = ast.parse(content)
             
             for node in ast.walk(tree):
                 if isinstance(node, ast.FunctionDef):
